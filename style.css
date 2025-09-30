@@ -1,0 +1,18 @@
+header {
+    background-color: aquamarine;
+}
+.header-class{
+    display: flex;
+    justify-content: space-between;
+}
+.search-class{
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+   .fav-btn .heart {
+     font-size:1.1rem; line-height:1; }
+.fav-btn {
+     margin:12px;
+      border:1px solid #2b3a55; background:#152038; border-radius:8px; padding:8px 10px; cursor:pointer; display:flex; align-items:center; gap:8px; }
+
