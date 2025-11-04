@@ -1,52 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      canvas {
+        background: #eeeeee;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+    <button id="runButton">Start game</button>
+    
+    <script>
+     const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+let x = canvas.width / 2;
+let y = canvas.height - 30;
+const dx = 2;
+const dy = -2;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Documento de CINE</title>
-</head>
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(x, y, 10, 0, Math.PI * 2);
+  ctx.fillStyle = "#0095DD";
+  ctx.fill();
+  ctx.closePath();
+}
 
-<body>
-    <header class="header-class">
-        <h1>Cine UDI</h1>
-        <div class="search-class"><button>search</button><input type="text"></div>
-      </header>
-    <main>
-        <h1>Cartelera</h1>
-        <div id="peliculas">
-            <article class="card" data-id="s1" aria-pressed="false" data-title="La Gran Aventura" data-genre="Acción" data-year="2024">
-                <a href="https://en.wikipedia.org/wiki/The_Avengers_%282012_film%29"><img width="700px" src="https://images.squarespace-cdn.com/content/v1/5bfdc74875f9ee194f3e0add/1597704181638-5P299V1BMNMZZSYN36XF/Snow+White+Huntsman+poster.png?format=1500w" alt="Póster de Avengers" /></a>
-                <h1 class="card-title">AVENGERS</h1>
-                <p class="card-meta">Acción/Aventura ·B 2h 23m</p>
-                <button class="fav-btn"  data-id="s1" aria-label="Agregar La Gran Aventura a favoritos"><span class="heart">♡</span></button>
-            </article>
-        </div>
-    </main>
-    <p><i>Peliculas mas populares</i></p>
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBall();
+  x += dx;
+  y += dy;
+}
 
-    <footer>2025</footer>
+function startGame() {
+  setInterval(draw, 10);
+}
 
-</body>
-<script>
-const favoritoId = new Set()
-const peliculasE1 = document.querySelector("#peliculas")
-console.log("peliculasE1",peliculasE1)
-peliculasE1.addEventListener("click",(action)=>{
-    const btn=action.target.closest(".fav-btn")
-    if(!btn)return
-
- const id=btn.dataset.id
-console.log("id",id);
- consolelog.log("favoritoid",favoritoId)
- const isFav=favoritoId.has(id)
-    if (isFav) favoriteIds.delete(id); else favoriteIds.add(id);
-    btn.setAttribute('aria-pressed', String(!isFav));
-    btn.classList.toggle('is-fav', !isFav);
-    const heart = btn.querySelector('.heart');
-    if (heart) heart.textContent = !isFav ? '♥' : '♡';
-})
-</script>
-
+const runButton = document.getElementById("runButton");
+runButton.addEventListener("click", () => {
+  startGame();
+  runButton.disabled = true;
+});
+    </script>
+  </body>
 </html>
